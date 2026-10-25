@@ -1,0 +1,75 @@
+/**
+ * @file App.js
+ * @description Componente principal de la aplicación React
+ * Configura las rutas de navegación usando React Router
+ * @author Jefferson, ana maria sanchez, ricardo florez, isables corrales
+ * @version 1.0
+ */
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Carrito from './pages/Carrito';
+import AdminDashboard from './pages/AdminDashboard';
+import CrearProducto from './pages/CrearProducto';
+import AdminPedidos from './pages/AdminPedidos';
+import Categoria from './pages/Categoria';
+import ProductoDetalle from './pages/ProductoDetalle';
+import Catalogo from './pages/Catalogo';
+import { ToastProvider } from './context/ToastContext';
+import Toast from './components/Toast';
+import './styles/App.css';
+/**
+ * Componente principal App
+ * Contiene toda la estructura de rutas de la aplicación
+ * @returns {JSX.Element} La estructura completa de la aplicación
+ */
+
+function App() {
+  return (
+    <ToastProvider>
+    <Router>
+      <div className="App">
+        {/* Notificación tipo toast, visible en toda la app, no bloquea la pantalla */}
+        <Toast />
+        {/* Barra de navegación visible en todas las páginas */}
+        <Navbar />
+
+         {/* Definición de rutas de la aplicación */}
+        <main className="app-main">
+        <Routes>
+          {/* Ruta principal - Página de inicio */}
+          <Route path="/" element={<Home />} />
+          {/* Rutas de autenticación */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          {/* Ruta del carrito de compras */}
+          <Route path="/carrito" element={<Carrito />} />
+          {/* Ruta del panel de administrador */}
+          <Route path="/admin" element={<AdminDashboard />} />
+          {/* Ruta para crear productos (solo admin) */}
+          <Route path="/crear-producto" element={<CrearProducto />} />
+          {/* Ruta para editar productos (solo admin) */}
+          <Route path="/editar-producto/:id" element={<CrearProducto />} />
+          {/* Ruta de detalle individual de un producto */}
+          <Route path="/producto/:id" element={<ProductoDetalle />} />
+          {/* Ruta de catalogo de protuctos*/}
+          <Route path="/catalogo" element={<Catalogo />} />
+          {/* Ruta de administración de pedidos (solo admin) */}
+          <Route path="/admin/pedidos" element={<AdminPedidos />} />
+          {/* Rutas de categorías de productos */}
+          <Route path="/:categoria" element={<Categoria />} />
+        </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
+    </ToastProvider>
+  );
+}
+
+export default App;
