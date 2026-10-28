@@ -4,6 +4,10 @@ import { productoService } from '../services/api';
 import api from '../services/api';
 import '../styles/CrearProducto.css';
 
+// 1. Obtener la URL base del backend dinámicamente
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
+const BACKEND_URL = API_URL.replace('/api', '');
+
 // Esta misma pantalla sirve para CREAR (ruta /crear-producto)
 // y para EDITAR (ruta /editar-producto/:id).
 function CrearProducto() {
@@ -75,9 +79,9 @@ function CrearProducto() {
     }
   };
 
-  // URL completa de la imagen que ya tiene el producto
+  // 2. URL completa de la imagen que ya tiene el producto (CORREGIDO)
   const urlImagenActual = imagenActual
-    ? (imagenActual.startsWith('http') ? imagenActual : `http://localhost:8080${imagenActual}`)
+    ? (imagenActual.startsWith('http') ? imagenActual : `${BACKEND_URL}${imagenActual}`)
     : null;
 
   const handleSubmit = async (e) => {

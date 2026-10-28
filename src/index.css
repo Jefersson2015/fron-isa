@@ -11,3 +11,65 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* =========================================
+   DISEÑO RESPONSIVE PARA MÓVILES (<= 768px)
+   ========================================= */
+@media (max-width: 768px) {
+  
+  /* 1. Evitar que las imágenes se salgan de la pantalla */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* 2. Tamaño de fuente base (evita el zoom automático en iOS al tocar inputs) */
+  body {
+    font-size: 16px;
+  }
+  
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.2rem; }
+
+  /* 3. Dar aire a los contenedores principales */
+  main, .app-main, .container {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+  }
+
+  /* 4. TRUCO MAESTRO: Forzar que las cuadrículas de productos sean de 1 sola columna */
+  /* Nota: Si tu clase se llama diferente, cámbiala aquí */
+  .grid, .grid-productos, .catalogo-grid, .productos-container, .row {
+    display: grid !important;
+    grid-template-columns: 1fr !important; /* 1 columna en móvil */
+    gap: 20px;
+  }
+
+  /* 5. Navbar: apilar logo y enlaces verticalmente */
+  nav, .navbar, .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 10px;
+  }
+
+  /* 6. Footer: centrar texto y apilar secciones */
+  footer, .footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding: 30px 15px;
+  }
+
+  /* 7. Botones y campos de formulario: fáciles de tocar con el dedo */
+  button, .btn, input, select, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px; /* Importante para iOS */
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+}

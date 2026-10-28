@@ -4,14 +4,19 @@ import { agregarAlCarrito } from '../services/carritoService';
 import { useToast } from '../context/ToastContext';
 import '../styles/ProductoCard.css';
 
+// 1. Obtener la URL base del backend dinámicamente
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
+const BACKEND_URL = API_URL.replace('/api', '');
+
 // Función para obtener la URL de la imagen
 const obtenerUrlImagen = (producto) => {
   // 1. Si el producto tiene imagen subida, usarla
   if (producto.imagen) {
-    // Si ya es URL completa, dejarla. Si es ruta relativa (/uploads/...), agregar el host del backend
+    // Si ya es URL completa (http/https), dejarla. 
+    // Si es ruta relativa (/uploads/...), agregar el host del backend dinámico
     return producto.imagen.startsWith('http')
       ? producto.imagen
-      : `http://localhost:8080${producto.imagen}`;
+      : `${BACKEND_URL}${producto.imagen}`; // <-- AQUÍ ESTABA EL CAMBIO
   }
 
   // 2. Fallback: Generar imagen por nombre si no hay imagen subida

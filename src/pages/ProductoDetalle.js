@@ -5,12 +5,16 @@ import { agregarAlCarrito } from '../services/carritoService';
 import { useToast } from '../context/ToastContext';
 import '../styles/ProductoDetalle.css';
 
+// 1. Obtener la URL base del backend dinámicamente
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
+const BACKEND_URL = API_URL.replace('/api', '');
+
 // Misma función de imagen que usa ProductoCard, para mantener consistencia
 const obtenerUrlImagen = (producto) => {
   if (producto?.imagen) {
     return producto.imagen.startsWith('http')
       ? producto.imagen
-      : `http://localhost:8080${producto.imagen}`;
+      : `${BACKEND_URL}${producto.imagen}`; // <-- AQUÍ ESTABA EL CAMBIO
   }
   return 'https://via.placeholder.com/500x400?text=Producto';
 };
